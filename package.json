@@ -1,0 +1,14 @@
+{
+    "name": "app-servic-gateway",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "author": "WangJinliang(hou80houzhu)",
+    "license": "MIT",
+    "dependencies": {
+        "ada-cloud-hub": "latest",
+        "ada-cloud-util": "latest",
+        "koa-bodyparser": "^4.2.1",
+        "koa-static": "^5.0.0"
+    }
+}

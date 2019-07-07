@@ -1,0 +1,9 @@
+{
+    "name": "app-servic-gateway",
+    "protocol": "http:",
+    "host": "localhost",
+    "port": "8087",
+    "cloudHub": "http://localhost:6080",
+    "username": "test",
+    "password": "123456"
+}
