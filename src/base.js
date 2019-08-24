@@ -1,6 +1,6 @@
-const { Controller } = require("ada-cloud-util/boost");
-const Result = require("ada-cloud-util/result");
-const Session = require("./session");
+import { Controller } from "ada-cloud-util/boost";
+import Result from "ada-cloud-util/result";
+import Session from "./session";
 
 class BaseController extends Controller {
     beforeExcute({ context, action }) {
@@ -25,4 +25,4 @@ class BaseController extends Controller {
     }
 }
 
-module.exports = BaseController;
+export default BaseController;

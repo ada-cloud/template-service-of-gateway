@@ -1,46 +1,25 @@
-const BaseController = require("../../base");
-const Session = require('../../session');
+import { controller, action, remoteService } from "ada-cloud-util/boost/annotation";
+import Result from "ada-cloud-util/result";
+import BaseController from "../../base";
+import Session from '../../session';
 
+@controller({ path: '/api/user' })
 class TextController extends BaseController {
-    static configure = {
-        basePath: "/api/user",
-        actions: {
-            login: { path: "/login", method: 'get', needLogin: false },
-            getAllUsers: { path: "/list", method: 'get' },
-            addUser: { path: "/add", method: 'post' },
-            check: { path: "/check", method: "get", needLogin: false },
-            getUserByIds: { path: '/items', method: 'get' }
-        }
-    }
 
+    @remoteService()
+    service = null;
+
+    @action({ path: "/login", needLogin: false })
     login({ request }) {
         let { username, password } = request.query;
         return this.service.get('/app-service-uc/user/login', { username, password }).then(({ code, data, message }) => {
             if (code === 0) {
-                return Session.set(data, data).then(() => this.success(data));
+                return Session.set(data, data).then(() => Result.getSuccessResult(data));
             } else {
-                return this.error(message);
+                return Result.getErrorResult(message);
             }
         });
     }
-
-    check({ context }) {
-        let { token } = context.header;
-        return Session.has(token);
-    }
-
-    getAllUsers({ request }) {
-        return this.service.get('/app-service-uc/user/list', request.query);
-    }
-
-    addUser({ request }) {
-        return this.service.post('/app-service-uc/user/add', request.body);
-    }
-
-    getUserByIds({ request }) {
-        return this.service.get('/app-service-uc/user/items', request.query);
-    }
-
 }
 
-module.exports = TextController;
+export default TextController;

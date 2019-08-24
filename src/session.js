@@ -1,6 +1,6 @@
 const session = {};
 
-module.exports = {
+const Manager = {
     get(key) {
         return Promise.resolve(session[key]);
     },
@@ -12,3 +12,5 @@ module.exports = {
         return Promise.resolve(session[key] !== undefined);
     }
 };
+
+export default Manager;
